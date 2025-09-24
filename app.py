@@ -15,7 +15,7 @@ st.title("📊 Dashboard de Resultados Saber Pro en Antioquia")
 
 # 2. Carga y preprocesamiento de datos
 # Asegúrate de que esta ruta sea correcta para tu archivo de datos
-file = "Resultados_únicos_Saber_11_SOLO ANTIOQUIA.csv"
+uploaded_file = st.file_uploader("Sube tu archivo CSV de resultados aquí", type=['csv'])
 
 @st.cache_data
 def load_data(path):
@@ -61,7 +61,12 @@ def load_data(path):
     return df
 
 # Carga los datos usando la función optimizada
-df_sample = load_data(file)
+# Carga los datos usando la función optimizada
+if uploaded_file:
+    df_sample = load_data(uploaded_file)
+else:
+    st.info("Por favor, sube un archivo CSV para empezar.")
+    st.stop()
 
 # 3. Procesamiento para los gráficos principales
 columnas_a_seleccionar = [
